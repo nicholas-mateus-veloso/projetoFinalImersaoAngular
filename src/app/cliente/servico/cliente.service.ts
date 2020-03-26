@@ -1,30 +1,35 @@
 import { Cliente } from './cliente';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
+  private url: string;
+
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+  ) {
+    this.url = `${environment.baseUrl}/cliente/`
+   }
 
   consultar(nome: string) {
-    return this.http.get("https://cors-anywhere.herokuapp.com/https://stormy-badlands-29216.herokuapp.com/api/cliente/consultar/" + nome);
+    return this.http.get(`${this.url}/consultar/${nome}`);
   }
 
   incluir(cliente: Cliente) {
-    return this.http.post("https://cors-anywhere.herokuapp.com/https://stormy-badlands-29216.herokuapp.com/api/cliente/incluir", cliente);
+    return this.http.post(`${this.url}/incluir`, cliente);
   }
 
   alterar(cliente: Cliente) {
-    return this.http.patch("https://cors-anywhere.herokuapp.com/https://stormy-badlands-29216.herokuapp.com/api/cliente/alterarparcial", cliente);
+    return this.http.patch(`${this.url}/incluir/alterarparcial`, cliente);
   }
 
   remover(cliente: Cliente) {
-    return this.http.post("https://cors-anywhere.herokuapp.com/https://stormy-badlands-29216.herokuapp.com/api/cliente/remover", cliente);
+    return this.http.post(`${this.url}/remover`, cliente);
   }
 
 }

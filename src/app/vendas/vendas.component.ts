@@ -13,12 +13,11 @@ import { ClienteService } from '../cliente/servico/cliente.service';
 export class VendasComponent implements OnInit {
 
   vendas: Vendas = new Vendas();
-  
   selecionado: Vendas;
-
   listaVendasProduto: Vendas[] = [];
-
   listaCliente: Cliente[] = [];
+  vendasIncluirComId: string;
+
 
   constructor(
     private router: Router,
@@ -37,7 +36,7 @@ export class VendasComponent implements OnInit {
     if(this.vendas.cliente != null) {
       codigoCliente = this.vendas.cliente.codigo;
     }
-    this.vendasService.pesquisar(codigoCliente).subscribe(
+    this.vendasService.consultar(codigoCliente).subscribe(
       data => {
         this.listaVendasProduto = <Vendas[]>data;
       }
@@ -50,7 +49,7 @@ export class VendasComponent implements OnInit {
       codigoCliente = this.vendas.cliente.codigo;
     }
 
-    this.vendasService.pesquisar(codigoCliente).subscribe(
+    this.vendasService.consultar(codigoCliente).subscribe(
       data => {
         this.listaVendasProduto = <Vendas[]>data;
       }
@@ -58,11 +57,15 @@ export class VendasComponent implements OnInit {
   }
 
   incluir() {
-    this.router.navigate(['/vendas/incluir']);
+    if(this.vendasIncluirComId === undefined) {
+      this.router.navigate(['/vendas/incluir']);
+    } else {
+      this.router.navigate(['/vendas/incluir/'+this.vendasIncluirComId]);
+    }
   }
 
   alterar() {
-    this.router.navigate(['/vendas/alterar/' + this.selecionado.cliente.codigo]);
+    this.router.navigate(['/vendas/alterar/' + this.selecionado.codigo]);
   }
 
   remover() {
@@ -75,6 +78,7 @@ export class VendasComponent implements OnInit {
 
   selecionar(valor) {
     this.selecionado = valor;
+    this.vendasIncluirComId = this.selecionado.codigo;
   }
 
 }

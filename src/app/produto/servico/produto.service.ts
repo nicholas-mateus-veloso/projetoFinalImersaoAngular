@@ -1,29 +1,34 @@
 import { Produto } from './produto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoService {
 
+  private url: string;
+
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    this.url = `${environment.baseUrl}/produto`
+  }
 
   pesquisar(nome) {
-    return this.http.get("https://cors-anywhere.herokuapp.com/https://stormy-badlands-29216.herokuapp.com/api/produto/consultar/" + nome);
+    return this.http.get(`${this.url}/consultar/${nome}`);
   }
 
   incluir(produto: Produto) {
-    return this.http.post("https://cors-anywhere.herokuapp.com/https://stormy-badlands-29216.herokuapp.com/api/produto/incluir", produto);
+    return this.http.post(`${this.url}/incluir`, produto);
   }
 
   alterar(produto: Produto) {
-    return this.http.patch("https://cors-anywhere.herokuapp.com/https://stormy-badlands-29216.herokuapp.com/api/produto/alterarparcial", produto);
+    return this.http.patch(`${this.url}/alterarparcial`, produto);
   }
 
   remover(produto: Produto) {
-    return this.http.post("https://cors-anywhere.herokuapp.com/https://stormy-badlands-29216.herokuapp.com/api/produto/remover", produto);
+    return this.http.post(`${this.url}/remover`, produto);
   }  
 }

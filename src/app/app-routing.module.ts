@@ -56,6 +56,11 @@ const routes: Routes = [
     path: 'vendas/incluir',
     component: VendasmanterComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'vendas/incluir/:id',
+    component: VendasmanterComponent,
+    pathMatch: 'full'
   }
 
 ];
