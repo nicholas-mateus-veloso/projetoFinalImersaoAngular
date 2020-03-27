@@ -51,7 +51,7 @@ export class ClientemanterComponent implements OnInit {
     this.clienteService.alterar(this.cliente).subscribe(
       data => {
         alert(data['mensagem']);
-        this.router.navigate(['/aluno'])
+        this.router.navigate(['/cliente'])
       }
     );
   } 

@@ -13,7 +13,7 @@ export class ClienteService {
   constructor(
     private http: HttpClient,
   ) {
-    this.url = `${environment.baseUrl}/cliente/`
+    this.url = `${environment.baseUrl}/cliente`
    }
 
   consultar(nome: string) {
@@ -25,7 +25,7 @@ export class ClienteService {
   }
 
   alterar(cliente: Cliente) {
-    return this.http.patch(`${this.url}/incluir/alterarparcial`, cliente);
+    return this.http.patch(`${this.url}/alterarparcial`, cliente);
   }
 
   remover(cliente: Cliente) {
