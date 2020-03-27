@@ -7,16 +7,22 @@
             <h5 class="card-title">Vendas - {{ operacao }}</h5>
 
             <div class="row mt-2">
-                <div class="form-group col-lg-3">
-                    <label for="nome" class="control-label">Código da Venda</label>
+                <div class="form-group col-lg-12">
+                    <label for="codigo" class="control-label">Código da Venda</label>
                     <input class="form-control" type="text" [(ngModel)]="vendas.codigo" />
                 </div>
-                <div class="form-group col-lg-9">
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-lg-6">
                     <label for="nome" class="control-label">Nome do Cliente:</label>
                     <select [(ngModel)]="vendas.cliente" class="form-control">
                         <option [ngValue]="null">Selecione</option>
                         <option *ngFor="let cliente of listaCliente" [ngValue]="cliente">{{ cliente.nome }}</option>
                     </select>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label for="data" class="control-label">Data da Venda</label>
+                    <input class="form-control" type="date" [(ngModel)]="vendas.dataVenda" />
                 </div>
             </div>
 
